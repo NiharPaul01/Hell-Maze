@@ -8,20 +8,27 @@ public class EnemySpawn : MonoBehaviour {
     [SerializeField] private float zPos;
     [SerializeField] private int maxEnemyCount; // Change to desired max enemies
     int enemyCount = 0;
-    private float timer = 0f;
+    
 
     private List<GameObject> spawnedEnemies = new List<GameObject>();
+    private float timer = 0f;
 
     void Start()
     {
         
-
-
-        StartCoroutine(EnemyDrop());
     }
 
-    IEnumerator EnemyDrop()
+    
+    void Update()
     {
+        timer += Time.deltaTime; // Update timer every frame
+
+        // Reset enemy count and clear spawned enemies after 50 seconds
+        if (timer >= 90f)
+        {
+            enemyCount = 0;
+            timer = 0f; 
+        }
         while (enemyCount < maxEnemyCount)
         {
             xPos = Random.Range(-110, 110);
@@ -29,18 +36,7 @@ public class EnemySpawn : MonoBehaviour {
             GameObject spawnedEnemy = Instantiate(enemy, new Vector3(xPos, 1, zPos), Quaternion.identity);
             enemyCount++;
             spawnedEnemies.Add(spawnedEnemy);
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-    void Update()
-    {
-        timer += Time.deltaTime;
-
-        // Reset spawned enemy count after 1 minute
-        if (timer >= 60f)
-        {
-            enemyCount = 0;
-            timer = 0f; // Reset timer
+            
         }
     }
 }

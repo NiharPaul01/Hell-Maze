@@ -6,7 +6,7 @@ public class diamondSpawner : MonoBehaviour {
     [Header("Spawn Settings")]
     public GameObject resourcePrefab;
     public float spawnChance;
-    [SerializeField] private int resourceCount;
+  
 
     [Header("Raycast Settings")]
     public float distanceBetweenCheck;
@@ -28,11 +28,11 @@ public class diamondSpawner : MonoBehaviour {
 
     private void Update()
     {
-        if (Time.time >= nextSpawnTime && resourceCount < 20)
+        if (Time.time >= nextSpawnTime)
         {
             
             SpawnResources();
-            nextSpawnTime += 30f; // Schedule next spawn after 30 seconds
+            nextSpawnTime += 300f; // Schedule next spawn after 30 seconds
             Debug.Log("spawn");
         }
     }
@@ -51,7 +51,7 @@ public class diamondSpawner : MonoBehaviour {
                     if (spawnChance > Random.Range(0, 101))
                     {
                         Instantiate(resourcePrefab, hit.point, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), transform);
-                        resourceCount += 1;
+                        
                         Debug.Log("spawn4");
 
                     }
