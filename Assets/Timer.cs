@@ -35,7 +35,7 @@ public class Timer : MonoBehaviour
         TimeSpan time = TimeSpan.FromSeconds(ctime);
         timtext.text = time.Minutes.ToString() + ":" + time.Seconds.ToString();
 
-        if (time.Seconds == 0)
+        if (time.Seconds == 0 && time.Minutes == 0)
         {
             Debug.Log("Time over!!!");
             SceneManager.LoadScene(0);

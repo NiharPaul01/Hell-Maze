@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class AIcontroller : MonoBehaviour
 {
-  
+
     Transform destination;
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
     private GameObject gameobj;
     private Animator _animator;
-    private float waitTime = 4.5f;
+    private float waitTime = 2f;
     bool isMoving;
     private void Start()
     {
@@ -32,17 +32,17 @@ public class AIcontroller : MonoBehaviour
 
         if (Vector3.Distance(transform.position, gameobj.transform.position) <= _navMeshAgent.stoppingDistance)
         {
-            
+
             _animator.SetBool("punch", true);
             _animator.SetBool("mo", !isMoving);
             StartCoroutine(WaitForAnimationAndLoadScene());
         }
 
-        
+
     }
     IEnumerator WaitForAnimationAndLoadScene()
     {
-        yield return new WaitForSeconds(waitTime); 
-        SceneManager.LoadScene(0); 
+        yield return new WaitForSeconds(waitTime);
+        SceneManager.LoadScene(0);
     }
 }
